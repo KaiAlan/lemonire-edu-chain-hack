@@ -1,12 +1,6 @@
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
+import { DashboardPage } from "@/components/dashboard-page"
 
 export default function Home() {
-  return (
-    <div>
-      <Button>
-        Hello
-      </Button>
-    </div>
-  );
+  return <DashboardPage />
 }
+
