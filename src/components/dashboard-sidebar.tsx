@@ -1,5 +1,6 @@
 "use client"
 
+import { usePathname } from "next/navigation"
 import { Home, BookOpen, Briefcase, FileCheck } from "lucide-react"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import {
@@ -14,6 +15,8 @@ import {
 } from "@/components/ui/sidebar"
 
 export function DashboardSidebar() {
+  const pathname = usePathname()
+
   return (
     <Sidebar>
       <SidebarHeader className="border-b py-4">
@@ -25,7 +28,7 @@ export function DashboardSidebar() {
       <SidebarContent>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton asChild isActive>
+            <SidebarMenuButton asChild isActive={pathname === "/"}>
               <a href="/" className="flex items-center">
                 <Home className="mr-2 h-4 w-4" />
                 <span>Home</span>
@@ -33,7 +36,7 @@ export function DashboardSidebar() {
             </SidebarMenuButton>
           </SidebarMenuItem>
           <SidebarMenuItem>
-            <SidebarMenuButton asChild>
+            <SidebarMenuButton asChild isActive={pathname === "/courses" || pathname.startsWith("/courses/")}>
               <a href="/courses" className="flex items-center">
                 <BookOpen className="mr-2 h-4 w-4" />
                 <span>Courses</span>
@@ -41,7 +44,7 @@ export function DashboardSidebar() {
             </SidebarMenuButton>
           </SidebarMenuItem>
           <SidebarMenuItem>
-            <SidebarMenuButton asChild>
+            <SidebarMenuButton asChild isActive={pathname === "/applied-jobs" || pathname.startsWith("/applied-jobs/")}>
               <a href="/applied-jobs" className="flex items-center">
                 <Briefcase className="mr-2 h-4 w-4" />
                 <span>Applied Jobs</span>
@@ -49,7 +52,7 @@ export function DashboardSidebar() {
             </SidebarMenuButton>
           </SidebarMenuItem>
           <SidebarMenuItem>
-            <SidebarMenuButton asChild>
+            <SidebarMenuButton asChild isActive={pathname === "/tests" || pathname.startsWith("/tests/")}>
               <a href="/tests" className="flex items-center">
                 <FileCheck className="mr-2 h-4 w-4" />
                 <span>Tests</span>

@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import { Search, MapPin, Briefcase, Filter } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
@@ -91,6 +92,7 @@ interface JobListingsProps {
 }
 
 export function JobListings({ searchQuery, setSearchQuery, filters, setFilters }: JobListingsProps) {
+  const router = useRouter()
   const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false)
 
   // Filter jobs based on search query and filters
@@ -107,6 +109,10 @@ export function JobListings({ searchQuery, setSearchQuery, filters, setFilters }
 
     return matchesSearch && matchesJobType && matchesLocation && matchesExperience
   })
+
+  const handleViewJob = (jobId: number) => {
+    router.push(`/job/${jobId}`)
+  }
 
   return (
     <div className="container py-6">
@@ -261,7 +267,9 @@ export function JobListings({ searchQuery, setSearchQuery, filters, setFilters }
               </CardContent>
               <CardFooter className="flex items-center justify-between border-t p-4">
                 <span className="text-xs text-muted-foreground">Posted {job.posted}</span>
-                <Button size="sm">Apply Now</Button>
+                <Button size="sm" onClick={() => handleViewJob(job.id)}>
+                  Apply Now
+                </Button>
               </CardFooter>
             </Card>
           ))
