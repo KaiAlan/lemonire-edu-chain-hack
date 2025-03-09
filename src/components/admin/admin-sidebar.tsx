@@ -1,6 +1,6 @@
 "use client"
 
-import { Home, Briefcase, PlusCircle, Building } from "lucide-react"
+import { Home, Briefcase, PlusCircle, Building, User } from "lucide-react"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import {
   Sidebar,
@@ -50,6 +50,14 @@ export function AdminSidebar({ onDashboardClick, onJobsClick, onCreateJobClick, 
             <SidebarMenuButton onClick={onCreateJobClick} isActive={currentView === "create-job"}>
               <PlusCircle className="mr-2 h-4 w-4" />
               <span>Create New Job</span>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+          <SidebarMenuItem>
+            <SidebarMenuButton asChild isActive={currentView === "profile"}>
+              <a href="/company/profile" className="flex items-center">
+                <User className="mr-2 h-4 w-4" />
+                <span>Company Profile</span>
+              </a>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>

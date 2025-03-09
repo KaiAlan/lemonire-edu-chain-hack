@@ -143,6 +143,11 @@ export function TestDetail({ testId }: TestDetailProps) {
     setIsSubmitted(true)
     setIsSubmitDialogOpen(false)
     // In a real app, you would submit the answers to the server here
+
+    // After a short delay, redirect to the applied jobs page
+    setTimeout(() => {
+      router.push("/applied-jobs")
+    }, 3000)
   }
 
   return (
@@ -341,7 +346,7 @@ export function TestDetail({ testId }: TestDetailProps) {
                   <Button variant="outline" onClick={() => router.push("/tests")}>
                     Back to Assessments
                   </Button>
-                  <Button onClick={() => router.push("/applied-jobs")}>View Application</Button>
+                  <Button onClick={() => router.push(`/applied-jobs/${testId}`)}>View Application</Button>
                 </div>
               </div>
             )}

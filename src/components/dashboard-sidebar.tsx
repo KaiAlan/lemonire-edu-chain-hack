@@ -1,7 +1,7 @@
 "use client"
 
 import { usePathname } from "next/navigation"
-import { Home, BookOpen, Briefcase, FileCheck } from "lucide-react"
+import { Home, BookOpen, Briefcase, FileCheck, User } from "lucide-react"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import {
   Sidebar,
@@ -56,6 +56,14 @@ export function DashboardSidebar() {
               <a href="/tests" className="flex items-center">
                 <FileCheck className="mr-2 h-4 w-4" />
                 <span>Tests</span>
+              </a>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+          <SidebarMenuItem>
+            <SidebarMenuButton asChild isActive={pathname === "/profile" || pathname.startsWith("/profile/")}>
+              <a href="/profile" className="flex items-center">
+                <User className="mr-2 h-4 w-4" />
+                <span>Profile</span>
               </a>
             </SidebarMenuButton>
           </SidebarMenuItem>

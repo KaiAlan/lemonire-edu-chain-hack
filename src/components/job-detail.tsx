@@ -63,6 +63,7 @@ export function JobDetail({ jobId }: JobDetailProps) {
     ],
     hasAssessment: true,
     assessmentDetails: {
+      id: jobId, // Using the same ID for simplicity
       title: "Frontend Development Assessment",
       duration: "60 minutes",
       questions: 15,
@@ -79,9 +80,13 @@ export function JobDetail({ jobId }: JobDetailProps) {
   }
 
   const handleApply = () => {
-    // In a real app, you would submit the application to the server
-    // For this example, we'll just navigate to the applied jobs page
-    router.push(`/applied-jobs`)
+    // If the job has an assessment, redirect to the test page
+    if (job.hasAssessment) {
+      router.push(`/tests/${job.assessmentDetails.id}`)
+    } else {
+      // Otherwise, just redirect to the applied jobs page
+      router.push(`/applied-jobs`)
+    }
   }
 
   return (
@@ -145,7 +150,7 @@ export function JobDetail({ jobId }: JobDetailProps) {
                     </DialogFooter>
                   </DialogContent>
                 </Dialog>
-                <Button onClick={handleApply}>Apply Now</Button>
+                <Button onClick={handleApply}>{job.hasAssessment ? "Apply & Take Assessment" : "Apply Now"}</Button>
               </div>
             </div>
 
@@ -285,9 +290,9 @@ export function JobDetail({ jobId }: JobDetailProps) {
                           </div>
                         </CardContent>
                         <CardFooter>
-                          <p className="text-sm text-muted-foreground">
-                            You'll be prompted to take the assessment after applying for this position.
-                          </p>
+                          <Button className="w-full" onClick={handleApply}>
+                            Apply & Take Assessment Now
+                          </Button>
                         </CardFooter>
                       </Card>
                     </TabsContent>
@@ -358,7 +363,7 @@ export function JobDetail({ jobId }: JobDetailProps) {
                 </Card>
 
                 <Button className="w-full" onClick={handleApply}>
-                  Apply Now
+                  {job.hasAssessment ? "Apply & Take Assessment" : "Apply Now"}
                 </Button>
               </div>
             </div>
